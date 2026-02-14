@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MovieContext>(options =>
 {
-    options.UseSqlite(builder.Configuration["ConnectionStrings:DatingApplication"]);
+    options.UseSqlite(builder.Configuration["ConnectionStrings:MovieContext"]);
 });
 
 var app = builder.Build();
