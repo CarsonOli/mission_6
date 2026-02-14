@@ -1,0 +1,83 @@
+﻿@model mission_6.Models.Movie
+
+@{
+    ViewData["Title"] = "Submit Movie";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Submit_Movie" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Director" class="form-label"></label>
+        <input asp-for="Director" class="form-control" />
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReleaseYear" class="form-label"></label>
+        <input asp-for="ReleaseYear" type="number" class="form-control" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Rating" class="form-label"></label>
+        <select asp-for="Rating" class="form-select" asp-items="Html.GetEnumSelectList<mission_6.Models.Rating>()">
+            <option value="">-- Select Rating --</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Edited</label>
+        <div>
+            <label class="me-3">
+                <input type="radio" asp-for="Edited" name="Edited" value="true" /> Yes
+            </label>
+            <label class="me-3">
+                <input type="radio" asp-for="Edited" name="Edited" value="false" /> No
+            </label>
+            <label>
+                <input type="radio" asp-for="Edited" name="Edited" value="" /> Leave blank
+            </label>
+        </div>
+        <span asp-validation-for="Edited" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LentTo" class="form-label"></label>
+        <input asp-for="LentTo" class="form-control" />
+        <span asp-validation-for="LentTo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <input asp-for="Notes" class="form-control" maxlength="25" />
+        <span asp-validation-for="Notes" class="text-danger"></span>
+        <div class="form-text">Notes are optional and limited to 25 characters.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
